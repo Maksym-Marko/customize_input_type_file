@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Customize input type file</title>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      .mx-input_upload_wrap{
+        position: relative;
+        display: table;
+        margin-top: 12px;
+      }
+      .mx-upload_button{
+        font-family: 'OpenSans-Light';
+        font-size: 14px;
+        color: #dd8a32;
+        text-decoration: underline;
+        display: table;
+        float: left;
+      }
+      .mx-this_file{
+        font-family: 'OpenSans-Light';
+        font-size: 14px;
+        display: table;
+        float: left;
+        margin-left: 22px;
+        padding: 3px 0px;
+        padding-left: 28px;
+        background-image: url(clip.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        user-select: none;
+      }
+      .mx-reset_file{
+        display: none;
+        width: 14px;
+        height: 14px;
+        float: left;
+        margin: 5px;
+        margin-left: 15px;
+        background-image: url(reset_file.png);
+        background-repeat: no-repeat;
+        background-position: 0 0;  
+        cursor: pointer;
+      }
+      .mx-reset_file_active{
+        display: block;
+      }
+      .mx-input_upload_wrap input[type="file"]{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 130px;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="mx-input_upload_wrap">
+      <span class="mx-upload_button">
+        Прикрепить файл
+      </span>
+      <span class="mx-this_file">
+        Файл не выбран          
+      </span>
+      <span class="mx-reset_file"></span>
+      <input type="file" name="upload[]" class="mx-input_file" multiple="" accept="">
+    </div>
+  
+    <script type="text/javascript" src="jquery-1.11.3.js"></script>
+    <script>
+      $( document ).ready( function(){
+        $( '.mx-input_file' ).change( function(){
+          var fileName = $( this ).val();
+          $( '.mx-this_file' ).text( fileName );
+          $( '.mx-reset_file' ).addClass( 'mx-reset_file_active' );
+          if( fileName == '' ){
+            $( '.mx-input_file' ).val( '' );
+            $( '.mx-reset_file' ).removeClass( 'mx-reset_file_active' );
+            $( '.mx-this_file' ).text( 'Файл не выбран' );
+          }
+        } );
+
+        $( '.mx-reset_file' ).on( 'click', function(){
+          $( '.mx-input_file' ).val( '' );
+          $( '.mx-this_file' ).text( 'Файл не выбран' );
+          $( this ).removeClass( 'mx-reset_file_active' );
+        } );
+
+      } );
+    </script>   
+
+  </body>
+</html>
